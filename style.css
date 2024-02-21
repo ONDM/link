@@ -1,0 +1,16 @@
+body
+{
+  background: #141414;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0
+}
+
+#odkaz
+{
+  color: #fff;
+  text-align: center;
+  font-size: 20px
+}
