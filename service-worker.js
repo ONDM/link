@@ -1,4 +1,4 @@
-const cacheName = 'OND-cache-v2';
+const cacheName = 'link-cache-v2';
 
 self.addEventListener('install', (event) => {
   console.log('Service Worker Installed');
