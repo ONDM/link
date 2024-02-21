@@ -7,11 +7,11 @@ self.addEventListener('install', (event) =>
     caches.open(cacheName).then((cache) =>
     {
       return cache.addAll([
-        'link/',
-        'link/manifest.json',
-        'link/style.css',
-        'link/favicon.png',
-        'link/sw.js',
+        '/link/',
+        '/link/manifest.json',
+        '/link/style.css',
+        '/link/favicon.png',
+        '/link/sw.js',
       ]);
     })
   );
