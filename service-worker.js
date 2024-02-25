@@ -1,30 +1,36 @@
-const cacheName = 'link-cache-v2';
+const cacheName = 'link-v1';
+const filesToCache = [
+  '/link/',
+  '/link/index.html',
+  '/link/style.css',
+  '/link/favicon.png'
+];
 
-self.addEventListener('install', (event) => {
-  console.log('Service Worker Installed');
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      return cache.addAll([
-        '/link/',
-        '/link/manifest.json',
-        '/link/style.css',
-        '/link/favicon.png',
-        '/link/sw.js',
-      ]);
-    })
+    caches.open(cacheName)
+      .then(cache => cache.addAll(filesToCache))
   );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    }).catch((error) => {
-      console.error('Error fetching:', error);
-    })
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
   );
 });
 
-self.addEventListener('error', (error) => {
-  console.error('Service Worker Error:', error);
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(existingCacheName => {
+            if (existingCacheName !== cacheName) {
+              return caches.delete(existingCacheName);
+            }
+          })
+        );
+      })
+  );
 });
