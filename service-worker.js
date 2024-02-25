@@ -3,7 +3,8 @@ const filesToCache = [
   '/link/',
   '/link/index.html',
   '/link/style.css',
-  '/link/favicon.png'
+  '/link/favicon.png',
+  '/link/font.woff2'
 ];
 
 self.addEventListener('install', event => {
